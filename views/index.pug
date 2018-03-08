@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title FCC | Image Search
+    body
+        h1 API: Image Search Abstraction Layer
+        p Node.js | Express | Firebase
+        <hr>
+        p Part of a series of Free Code Camp Backend / API projects.
+        p This API queries a Google Custom Search Engine, simplifying the results.
+        p You can also check out what the recent search queries were!
+        h3 User Story
+        ul
+            li I can get the image URLs, alt text and page urls for a set of images relating to a given search string.
+            li I can paginate through the responses by adding a ?offset=2 parameter to the URL.
+            li I can get a list of the most recently submitted search strings.
+        <hr>
+        h3 Example Usage
+        p To make a search:
+        code ...herokuapp.com/search/cats
+        p To see 10 most recent search queries 
+        code ...herokuapp.com/recent
+        p To paginate search results
+        code ...herokuapp.com/search/cats?offset=2<br>
+        code // results come in groups of 10
+        h3 Example Response 
+        p Search:
+        p Returns an array of result objects
+        code {<br>
+        code "title": "Is Your Cat Left-Handed? Here's How to Tell.", <br>
+        code "alt": "Like humans, domestic cats have a paw preference that's often related to their sex.",<br>
+        code "page_url": "https://news.nationalgeographic.com/2018/01/animals-pets-cats-right-handed/",<br>
+        code "src_url": "https://news.nationalgeographic.com/content/dam/news/2018/01/29/cats-right-paw/01-Cats.ngsversion.1517259605074.adapt.1900.1.jpg" <br> }
