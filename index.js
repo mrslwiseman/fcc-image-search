@@ -6,7 +6,6 @@ const path = require('path');
 const parse = require('./helpers/parsers');
 const firebase = require('firebase');
 
-
 app.set('view engine', 'pug')
 app.set('views', './views')
 if (app.get('env') !== 'production') {
@@ -48,7 +47,7 @@ function formatResponse(d) {
         }))
 }
 
-function search(q,offset) {
+function search(q,offset = 0) {
     return axios({
         method: 'get',
         url: 'https://www.googleapis.com/customsearch/v1',
@@ -57,7 +56,7 @@ function search(q,offset) {
             cx: '015745276868716929893:w-qq-w5u57g',
             key: process.env.KEY,
             fields: 'items/link,items/pagemap/imageobject/caption,items/pagemap/cse_image/src,items/title',
-            start: offset || 0
+            start: offset
         }
     })
 }
