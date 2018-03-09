@@ -35,7 +35,23 @@ function writeSearchData(req, timestamp) {
             language: parse.lang(req),
             user_agent: parse.userAgent(req)
         });
-    }
+}
+
+
+function sortDesc(val){
+    return Object.keys(val)
+        .map(key => val[key])
+        .sort((a,b) => b.timestamp - a.timestamp)
+}
+
+function getRecentSearches() {
+    return database
+        .ref('/searches')
+        .limitToLast(10)
+        .once('value')
+        .then(res => sortDesc(res.val())) // // firebase only gives us ascending results so we have to sort here
+        .catch(e => res.json('there was an error getting recent searches.' + e))
+}
 
 function formatResponse(d) {
     return d.data.items
@@ -47,7 +63,7 @@ function formatResponse(d) {
         }))
 }
 
-function search(q,offset = 0) {
+function search(q, offset = 0) {
     return axios({
         method: 'get',
         url: 'https://www.googleapis.com/customsearch/v1',
@@ -69,21 +85,16 @@ app.get('/search/:search', (req, res) => {
         .then(r => res.json(r))
         .catch(e => res.json('there was an error.' + e))
 })
-function getRecentSearches(){
-    return database
-        .ref('/searches')
-        .limitToFirst(10)
-        .once('value')
-}
+
 
 app.get('/recent', (req, res) => {
     getRecentSearches()
         .then(r => {
-            if(r.val() !== null) {
-                res.json(r.val()); 
-                res.end() 
+            if (r !== null) {
+                res.json(r);
+            } else {
+                throw Error('Error connecting to recent searches DB')
             }
-            throw Error('Error connecting to recent searches DB')
         }).catch(e => res.json('Oh No! There was an error! ' + e.message))
 })
 
