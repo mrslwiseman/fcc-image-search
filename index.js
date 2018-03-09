@@ -6,11 +6,11 @@ const path = require('path');
 const parse = require('./helpers/parsers');
 const firebase = require('firebase');
 
-app.set('view engine', 'pug')
-app.set('views', './views')
 if (app.get('env') !== 'production') {
     require('dotenv').config();
 }
+app.set('view engine', 'pug')
+app.set('views', './views')
 app.set('port', process.env.PORT || 5000)
 
 const config = {
