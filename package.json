@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "8.1.x",
+    "npm": "5.3.x"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +22,8 @@
   },
   "devDependencies": {
     "dotenv": "^5.0.1"
-  }
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ]
 }
